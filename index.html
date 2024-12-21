@@ -20,6 +20,45 @@
             max-width: 100%;
             height: auto;
         }
+
+        /* 新增的针对标题h1的样式规则 */
+        h1 {
+            text-align: center;
+            font-family: "SimSun", sans-serif; /* 设置字体为宋体，若系统无宋体则使用备用字体sans-serif */
+        }
+
+        /* 屏幕适配相关样式，以下是一些示例，你可根据实际需求进一步调整 */
+        /* 当屏幕宽度小于等于768px时（通常适配移动端等小屏幕设备） */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px; /* 缩小标题字体大小 */
+            }
+            /* 可以根据实际情况调整背景图片等其他元素的样式，比如让背景图片只显示部分区域等 */
+            body {
+                background-size: contain;
+            }
+        }
+
+        /* 当屏幕宽度大于768px且小于等于1024px时（比如一些平板设备） */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            h1 {
+                font-size: 30px;
+            }
+            /* 调整其他元素样式 */
+            body {
+                background-size: cover;
+            }
+        }
+
+        /* 当屏幕宽度大于1024px（桌面端等大屏幕设备） */
+        @media (min-width: 1025px) {
+            h1 {
+                font-size: 36px;
+            }
+            body {
+                background-size: cover;
+            }
+        }
     </style>
 </head>
 
