@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>DiscussNow!</title>
+    <!-- 引入站点图标 -->
+    <link rel="icon" href="https://drive.almondcloud.cn/f/Jw9NHR/IMG_3314.ico" type="image/x-icon">
     <style>
         /* 设置页面整体背景图片 */
         body {
@@ -24,33 +26,28 @@
         /* 新增的针对标题h1的样式规则 */
         h1 {
             text-align: center;
-            font-family: "SimSun", sans-serif; /* 设置字体为宋体，若系统无宋体则使用备用字体sans-serif */
+            font-family: "SimSun", sans-serif;
         }
 
-        /* 屏幕适配相关样式，以下是一些示例，你可根据实际需求进一步调整 */
-        /* 当屏幕宽度小于等于768px时（通常适配移动端等小屏幕设备） */
+        /* 屏幕适配相关样式，以下是一些示例，可根据实际需求进一步调整 */
         @media (max-width: 768px) {
             h1 {
-                font-size: 24px; /* 缩小标题字体大小 */
+                font-size: 24px;
             }
-            /* 可以根据实际情况调整背景图片等其他元素的样式，比如让背景图片只显示部分区域等 */
             body {
                 background-size: contain;
             }
         }
 
-        /* 当屏幕宽度大于768px且小于等于1024px时（比如一些平板设备） */
         @media (min-width: 769px) and (max-width: 1024px) {
             h1 {
                 font-size: 30px;
             }
-            /* 调整其他元素样式 */
             body {
                 background-size: cover;
             }
         }
 
-        /* 当屏幕宽度大于1024px（桌面端等大屏幕设备） */
         @media (min-width: 1025px) {
             h1 {
                 font-size: 36px;
@@ -61,47 +58,46 @@
         }
 
         /* 加载动画样式 */
-       .loader {
-            border: 16px solid #f3f3f3; /* 加载动画的浅色边框 */
-            border-top: 16px solid #3498db; /* 加载动画的顶部深色边框，形成旋转效果 */
+      .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
             border-radius: 50%;
             width: 120px;
             height: 120px;
-            animation: spin 2s linear infinite; /* 应用名为spin的动画，2秒完成一次，线性，无限循环 */
+            animation: spin 2s linear infinite;
             position: absolute;
             top: 50%;
             left: 50%;
             margin-top: -60px;
             margin-left: -60px;
-            z-index: 9999; /* 确保加载动画在其他元素之上显示 */
+            z-index: 9999;
         }
 
         @keyframes spin {
             0% {
-                transform: rotate(0deg); /* 初始状态不旋转 */
+                transform: rotate(0deg);
             }
 
             100% {
-                transform: rotate(360deg); /* 旋转360度，完成一圈旋转 */
+                transform: rotate(360deg);
             }
         }
 
         /* 初始隐藏页面内容，只显示加载动画 */
-       .page-content {
+      .page-content {
             display: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="loader"></div> <!-- 加载动画元素 -->
-    <div class="page-content"> <!-- 包裹页面实际内容的容器 -->
+    <div class="loader"></div>
+    <div class="page-content">
         <h1>欢迎来到留言板</h1>
         <div id="giscus-container"></div>
     </div>
     <script>
         window.onload = function () {
-            // 页面加载完成后，隐藏加载动画，显示页面内容
             document.querySelector('.loader').style.display = 'none';
             document.querySelector('.page-content').style.display = 'block';
         };
