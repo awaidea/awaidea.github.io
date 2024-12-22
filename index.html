@@ -8,20 +8,64 @@
     <link rel="icon" href="https://drive.almondcloud.cn/f/Jw9NHR/IMG_3314.ico" type="image/x-icon">
     <style>
         /* 之前已有的样式代码保持不变，此处省略重复样式代码 */
+    .page-content {
+            display: flex;
+            justify-content: center;
+        }
+     .loader {
+            width: 100%;
+            height: 20px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+        }
+    .loader-progress {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        /* 新增样式，将图片设置为背景 */
+        #bingImage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* 加载蒙版样式 */
+      .loading-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
-    <div class="loader">
-        <span class="loader-percentage">0%</span>
+    <!-- 新增加载蒙版元素 -->
+    <div class="loading-mask">
+        <div class="loader">
+            <div class="loader-progress"></div>
+        </div>
     </div>
     <div class="mask"></div>
     <div class="page-content">
         <h1>Creme</h1>
         <div id="giscus-container" class="main-content"></div>
     </div>
+    <!-- 新增用于显示背景图的 img 元素 -->
+    <img id="bingImage" />
     <script>
-        const loaderPercentage = document.querySelector('.loader-percentage');
+        const loaderProgress = document.querySelector('.loader-progress');
+        const loadingMask = document.querySelector('.loading-mask');
         const url = 'your_resource_url_here';  // 替换为实际资源的URL，比如图片、文本等
         fetch(url).then(response => {
             const reader = response.body.getReader();
@@ -30,7 +74,8 @@
             const read = () => {
                 return reader.read().then(({ done, value }) => {
                     if (done) {
-                        // 资源读取完毕后的处理，如隐藏加载动画显示页面内容等
+                        // 资源读取完毕后的处理，隐藏加载蒙版、加载条，显示页面内容
+                        loadingMask.style.display = 'none';
                         document.querySelector('.loader').style.display = 'none';
                         document.querySelector('.page-content').style.display = 'block';
                         document.querySelector('.mask').style.display = 'none';
@@ -38,7 +83,7 @@
                     }
                     receivedLength += value.length;
                     const percentComplete = (receivedLength / contentLength) * 100;
-                    loaderPercentage.textContent = Math.round(percentComplete) + '%';
+                    loaderProgress.style.width = Math.round(percentComplete) + '%';
                     return read();
                 });
             };
@@ -60,6 +105,15 @@
             data-loading="lazy"
             crossorigin="anonymous"
             async>
+    </script>
+    <script>
+        fetch('https://bing.com/HPImageArchive.aspx?format=js&idx=0&n=1')
+          .then(response => response.json())
+          .then(data => {
+                const imgUrl = `https://www.bing.com${data.images[0].url}`;
+                document.getElementById('bingImage').src = imgUrl;
+            })
+          .catch(error => console.error('Error fetching Bing image:', error));
     </script>
 </body>
 
