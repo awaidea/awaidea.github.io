@@ -8,7 +8,7 @@
     <link rel="icon" href="https://drive.almondcloud.cn/f/Jw9NHR/IMG_3314.ico" type="image/x-icon">
     <style>
         /* 之前已有的样式代码保持不变，此处省略重复样式代码 */
-    .page-content {
+     .page-content {
             display: flex;
             justify-content: center;
         }
@@ -18,7 +18,7 @@
             background-color: #f3f3f3;
             border-radius: 5px;
         }
-    .loader-progress {
+     .loader-progress {
             width: 0%;
             height: 100%;
             background-color: #4CAF50;
@@ -34,7 +34,7 @@
             z-index: -1;
         }
         /* 加载蒙版样式 */
-      .loading-mask {
+     .loading-mask {
             position: fixed;
             top: 0;
             left: 0;
@@ -58,7 +58,7 @@
     </div>
     <div class="mask"></div>
     <div class="page-content">
-        <h1>Creme</h1>
+        <h1 style="text-align: center;">Creme</h1>
         <div id="giscus-container" class="main-content"></div>
     </div>
     <!-- 新增用于显示背景图的 img 元素 -->
@@ -108,12 +108,12 @@
     </script>
     <script>
         fetch('https://bing.com/HPImageArchive.aspx?format=js&idx=0&n=1')
-          .then(response => response.json())
-          .then(data => {
+         .then(response => response.json())
+         .then(data => {
                 const imgUrl = `https://www.bing.com${data.images[0].url}`;
                 document.getElementById('bingImage').src = imgUrl;
             })
-          .catch(error => console.error('Error fetching Bing image:', error));
+         .catch(error => console.error('Error fetching Bing image:', error));
     </script>
 </body>
 
